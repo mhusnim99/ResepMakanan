@@ -5,6 +5,8 @@ import Register from './register';
 import Login from './login';
 import Tabs from './(tabs)/_layout';
 import Kalkulator from './(tabs)/kalku';
+import Ingredient from './(tabs)/Ingredient';
+import Recipe from './(tabs)/Recipe';
 
 const Stack = createNativeStackNavigator();
 const noHead = { headerShown: false };
@@ -17,7 +19,8 @@ function MyStack() {
             <Stack.Screen name="Register" component={Register} options={noHead} />
             <Stack.Screen name="Tabs" component={Tabs} options={noHead} />
             <Stack.Screen name='Kalkulator' component={Kalkulator} options={noHead}/>
-
+            <Stack.Screen name='Ingredient' component={Ingredient} options={noHead}/>
+            <Stack.Screen name='Recipe' component={Recipe} options={noHead}/>
         </Stack.Navigator>
     </NavigationContainer>
   );
