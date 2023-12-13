@@ -7,6 +7,8 @@ import Tabs from './(tabs)/_layout';
 import Kalkulator from './(tabs)/kalku';
 import Ingredient from './(tabs)/Ingredient';
 import Recipe from './(tabs)/Recipe';
+import kalorirendah from './(tabs)/kalorirendah';
+import kaloritinggi from './(tabs)/kaloritinggi';
 
 const Stack = createNativeStackNavigator();
 const noHead = { headerShown: false };
@@ -21,6 +23,8 @@ function MyStack() {
             <Stack.Screen name='Kalkulator' component={Kalkulator} options={noHead}/>
             <Stack.Screen name='Ingredient' component={Ingredient} options={noHead}/>
             <Stack.Screen name='Recipe' component={Recipe} options={noHead}/>
+            <Stack.Screen name='kalorirendah' component={kalorirendah} options={noHead}/>
+            <Stack.Screen name='kaloritinggi' component={kaloritinggi} options={noHead}/>
         </Stack.Navigator>
     </NavigationContainer>
   );
