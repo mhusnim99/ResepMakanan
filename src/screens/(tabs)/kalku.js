@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Heading, Input, Button, Text, FormControl, NativeBaseProvider, ScrollView, Image, Center } from 'native-base';
+import { Box, Heading, Input, Button, Text, FormControl, NativeBaseProvider, ScrollView, Image, Center, Pressable, Icon } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native";
 import Rekomkal from "../../dummy/rekomkal";
 import { HStack } from 'native-base';
+import { Ionicons } from "@expo/vector-icons";
 
 const Calcucalator = () => {
 
@@ -23,6 +24,9 @@ const Calcucalator = () => {
   return (
     <SafeAreaView>
       <ScrollView>
+        <Pressable onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 40, left: 20, zIndex: 1 }}>
+            <Icon as={Ionicons} name="arrow-back" size={10} color="black" />
+      </Pressable>
           <Box bg='white'>
             <TouchableOpacity onPress={() => navigation.navigate('Kategori')}>
               <Image

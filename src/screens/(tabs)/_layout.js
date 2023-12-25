@@ -5,7 +5,7 @@ import { NativeBaseProvider, Text, useKeyboardBottomInset } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "./HomeScreen";
 import Save from "../(tabs)/save";
-import Profile from "../(tabs)/profile";
+import Profile from "../(tabs)/Profile";
 import Kategori from "../(tabs)/kategori";
 
 
