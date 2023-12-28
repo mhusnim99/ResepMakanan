@@ -1,104 +1,126 @@
 import React, { useState } from 'react';
-import { Box, Heading, Input, Button, Text, FormControl, NativeBaseProvider, ScrollView, Image, Center, Pressable, Icon } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView } from "react-native-safe-area-context";
-import { TouchableOpacity } from "react-native";
-import Rekomkal from "../../dummy/rekomkal";
-import { HStack } from 'native-base';
-import { Ionicons } from "@expo/vector-icons";
+import {
+  Box,
+  Heading,
+  Input,
+  Button,
+  Text,
+  FormControl,
+  NativeBaseProvider,
+  ScrollView,
+  Center,
+  HStack,
+} from 'native-base';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const Calcucalator = () => {
+const Kalkulator = () => {
+  const [tinggi, setTinggi] = useState('');
+  const [berat, setBerat] = useState('');
+  const [kategoriBMI, setKategoriBMI] = useState('');
+  const [hasil, setHasil] = useState(null);
 
-  const [tinggibadan, settinggibadan] = useState('');
-  const [beratbadan, setberatbadan] = useState('');
-  const [umur, setumur] = useState('');
+  const hitungBMI = () => {
+    if (tinggi && berat) {
+      const tinggiCM = tinggi / 100;
+      const bmi = (berat / (tinggiCM * tinggiCM)).toFixed(2);
+      const kategori = hasilKategoriBMI(bmi);
+  
+      setHasil(bmi);
+      setKategoriBMI(kategori); 
+    }
+  };  
 
-  const handleSubmit = () => {
-    console.log('tinggibadan:', tinggibadan);
-    console.log('beratbadan:', beratbadan);
-    console.log('umur:', umur);
+  const resetFields = () => {
+    setTinggi('');
+    setBerat('');
+    setKategoriBMI('');
+    setHasil(null);
   };
 
-  const navigation = useNavigation();
+  const hasilKategoriBMI = (bmi) => {
+    if (bmi < 18.5) {
+      return { category: 'Kekurangan Berat Badan', title: ['Tinggi Protein'] };
+    } else if (bmi >= 18.5 && bmi < 24) {
+      return { category: 'Berat Badan Normal', title: ['Rendah Karbo', 'Tinggi Protein', 'Rendah Lemak'] };
+    } else {
+      return { category: 'Kelebihan Berat Badan', title: ['Rendah Lemak', 'Rendah Karbo'] };
+    }
+  };
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <Pressable onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 40, left: 20, zIndex: 1 }}>
-            <Icon as={Ionicons} name="arrow-back" size={10} color="black" />
-      </Pressable>
-          <Box bg='white'>
-            <TouchableOpacity onPress={() => navigation.navigate('Kategori')}>
-              <Image
-                source={require("../../images/arrow.jpg")}
-                style={{ width: 18, height: 18 }}
-                alt='Image Data'
-                ml={"5"}
-                mt={"3"}
-                size={"2xl"}
-              />
-            </TouchableOpacity>
-          </Box>
-          <Box flex={1} p={4} alignItems='center' justifyContent='center' bg='white'>
-            <Box alignItems="center">
-              <Button marginTop={"5"} marginBottom={"5"} backgroundColor={"yellow.500"} width={"252"} height={"46"} fontWeight={"extraBlack"} size={"lg"} >
-                <Text color='white' fontSize={21}>BMI Calcucalator</Text>
-              </Button>
-            </Box>
-            <FormControl>
-              <FormControl.Label>tinggi badan</FormControl.Label>
-              <Input
-                placeholder="Masukkan Angka"
-                value={tinggibadan}
-                onChangeText={(text) => settinggibadan(text)}
-                mb={2}
-                bgColor='white'
-                borderRadius={15}
-              />
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>berat badan</FormControl.Label>
-              <Input
-                placeholder="Masukkan Angka"
-                value={beratbadan}
-                onChangeText={(text) => setberatbadan(text)}
-                mb={2}
-                bgColor='white'
-                borderRadius={15}
-              />
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>umur</FormControl.Label>
-              <Input
-                placeholder="Masukkan Angka"
-                value={umur}
-                onChangeText={(text) => setumur(text)}
-                secureText
-                mb={2}
-                bgColor='white'
-                borderRadius={15}
-              />
-              <Box alignItems="center" mt={"4"} borderRadius={15} >
-                <Button bg={"yellow.500"} borderRadius={15} width={"230"} height={"46"} >
-                  <Text color='white' fontSize={20}>Hitung</Text>
-                </Button>
+    <Box bg="#FFEEDB" flex={1}>
+      <SafeAreaView>
+        <ScrollView>
+          <NativeBaseProvider>
+              <Box p={4} bg='white'>
+                <Center>
+                  <Heading mb={4} color='#ED7D31'>
+                    BMI Kalkulator
+                  </Heading>
+                </Center>
+                <FormControl>
+                  <FormControl.Label>Tinggi Badan</FormControl.Label>
+                  <Input
+                    placeholder='Tinggi Badan (cm)'
+                    value={tinggi}
+                    onChangeText={(text) => setTinggi(text)}
+                    mb={2}
+                    borderRadius={15}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormControl.Label>Berat Badan</FormControl.Label>
+                  <Input
+                    placeholder='Berat Badan (kg)'
+                    value={berat}
+                    onChangeText={(text) => setBerat(text)}
+                    mb={2}
+                    borderRadius={15}
+                  />
+                </FormControl>
+
+                <HStack space={2} mt={5}>
+                  <Button
+                    onPress={hitungBMI}
+                    backgroundColor='#ED7D31'
+                    flex={1}
+                    borderRadius={15}
+                    height={46}
+                  >
+                    <Text color='white'>Hitung BMI</Text>
+                  </Button>
+                  <Button
+                    onPress={resetFields}
+                    backgroundColor='white'
+                    flex={1}
+                    borderRadius={15}
+                    borderColor="#A9A9A9"
+                    borderWidth={1}
+                    height={46}
+                  >
+                    <Text color='black'>Reset</Text>
+                  </Button>
+                </HStack>
+
+                {hasil !== null && (
+                  <Box mt={4} p={4} bg='#FFD699' borderRadius={15}>
+                    <Text color='#333' fontSize="md" fontWeight='bold'>
+                      BMI Anda: {hasil}
+                    </Text>
+                    <Text color='#333' fontSize="md" fontWeight='bold' mt={2}>
+                      Kategori: {kategoriBMI.category}
+                    </Text>
+                    <Text color='#333' fontSize="md" fontWeight='bold' mt={2}>
+                      Rekomendasi Kategori Resep: {kategoriBMI.title.join(', ')}
+                    </Text>
+                  </Box>
+                )}
               </Box>
-              <FormControl>
-                <FormControl.Label>Hasil</FormControl.Label>
-                <Input
-                  value={beratbadan}
-                  onChangeText={(text) => setberatbadan(text)}
-                  mb={2}
-                  bgColor='white'
-                  borderRadius={15}
-                />
-              </FormControl>
-            </FormControl>
-            <Text mt={2} >Berikut ini makanan yang <Text color="blue.500" onPress={() => navigation.navigate('Kategori')}>direkomendasikan</Text></Text>
-          </Box>
-      </ScrollView>
-    </SafeAreaView>
+          </NativeBaseProvider>
+        </ScrollView>
+      </SafeAreaView>
+    </Box>
   );
 };
 
-export default Calcucalator;
+export default Kalkulator;
