@@ -1,19 +1,25 @@
-import { Heading, Center, Box, SafeAreaView, Button, Text } from "native-base";
+import React from 'react';
+import { useNavigation } from "@react-navigation/native";
+import { Heading, Center, Box, Button, Text } from "native-base";
 
 const Profile = () => {
+  const navigation = useNavigation(); // Taruh useNavigation di dalam komponen Profile
+  
   return (
-    <>
-      {/* <SafeAreaView>
-        <Box alignItems="center">
-          <Button marginTop={"5"} marginBottom={"5"} backgroundColor={"yellow.500"} width={"252"} height={"46"} fontWeight={"extraBlack"} size={"lg"} >
-          <Text color='white' fontSize={18}>Kategori</Text>
-          </Button>
-        </Box>
-      </SafeAreaView> */}
-      <Center flex={1}>
-        <Heading>Ini Halaman profile</Heading>
-      </Center>
-    </>
+    <Center flex={1}>
+      <Heading>Ini Halaman profile</Heading>
+      <Box alignItems="center" p={30} borderRadius={15}>
+      <Button
+          size="lg"
+          borderRadius={10}
+          mr={5}
+          onPress={() => navigation.navigate("Edit Profile")}
+          bg="#FAA70A"
+        >
+          Edit Profile
+        </Button>
+      </Box>
+    </Center>
   );
 };
 

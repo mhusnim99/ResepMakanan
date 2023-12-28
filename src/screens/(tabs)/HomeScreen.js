@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Image, Text, Box, View, FlatList, Icon, ScrollView } from "native-base";
+import { Heading, Image, Text, Box, View, FlatList, Icon, ScrollView, HStack, Button} from "native-base";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import resep from "../../dummy/resep";
@@ -110,7 +110,32 @@ const HomeScreen = () => {
           />
         </Box>
         <Box py={"2"} pt={2}>
-          <Text ml={4} fontWeight={700} mb={3}>Restaurant Recommendations</Text>
+          <HStack>
+            <Box width='78%'>
+              <Text ml={4} fontWeight={700} mb={3}>Restaurant Recommendations</Text>
+            </Box>
+            <Box width='20%'>
+              <Button
+                size = "sm"
+                borderRadius={10}
+                mr={1}
+                onPress={() => navigation.navigate("List Restaurant")}
+                bg="#FAA70A"
+              >
+              See All
+            </Button>
+            </Box>
+          </HStack>
+          <TouchableOpacity onPress={() => console.log('See All Pressed')}  
+          backgroundColor=  'blue'
+          padding ={10}
+          alignItems= 'center'
+          margin= {10}>
+            <Text fontSize= {16}
+            color= 'white'>
+              See All
+            </Text>
+          </TouchableOpacity>
           <FlatList
             data={restaurants}
             renderItem={renderRestaurantItem}
