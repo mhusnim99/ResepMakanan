@@ -60,7 +60,6 @@ const Tabs = () => {
       <Tab.Screen name="Kategori" component={Kategori} options={noHead} />
       <Tab.Screen name="Save" component={Save} options={noHead} />
       <Tab.Screen name="Profile" component={Profile} options={noHead} />
-      <Tab.Screen name="Favorit" component={Favorit} options={noHead} />
     </Tab.Navigator>
   );
 };

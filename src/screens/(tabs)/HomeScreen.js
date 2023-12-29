@@ -130,7 +130,6 @@ const HomeScreen = () => {
             </Box>
           </HStack>
           <FlatList
-            data={restaurants}
             data={restaurants.slice(0, 5)}
             renderItem={renderRestaurantItem}
             keyExtractor={(item) => item.id.toString()}
