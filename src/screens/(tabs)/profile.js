@@ -1,95 +1,119 @@
-import React, { useState } from 'react';
-import { Box, Center, NativeBaseProvider, Text, Pressable, Image, Input, Icon, Button } from 'native-base';
-import { MaterialIcons } from '@expo/vector-icons';
+
+import React, { useState, useEffect } from "react";
+import { Box, Text, Image, VStack, ScrollView } from "@gluestack-ui/themed";
+import { Button } from "../../components";
+import { clearStorage, getData } from "../../utils";
+import FIREBASE from "../../config/FIREBASE";
 
 const Profile = ({ navigation }) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [profile, setProfile] = useState(null);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+  const getUserData = () => {
+    getData("user").then((res) => {
+      const data = res;
+      if (data) {
+        console.log("isi data", data);
+        setProfile(data);
+      } else {
+        // navigation.replace('Login');
+      }
+    });
+  };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      getUserData();
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
+
+  const onSubmit = (profile) => {
+    if (profile) {
+      FIREBASE.auth()
+        .signOut()
+        .then(() => {
+          // Sign-out successful.
+          clearStorage();
+          navigation.navigate('Login');
+        })
+        .catch((error) => {
+          // An error happened.
+          alert(error);
+        });
+    } else {
+      navigation.replace("login");
+    }
   };
 
   return (
-    <NativeBaseProvider>
-      <Box flex={1}>
-      <Box borderBottomRadius="120" height="25%" bg="#FAA70A">
-          <Center>
-            <Text mt="60" fontSize="30" color="white" fontWeight="bold">
-              Profil Pengguna
-            </Text>
-            <Image
-              mt="2"
-              size={140}
-              borderRadius={100}
-              source={{
-                uri: 'https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/03/04/Shizuka-dari-kartun-Doraemon-3685993669.jpg',
-              }}
-            />
-          </Center>
+    <Box
+      mt={"$5"}
+      mx={"$5"}
+      backgroundColor="$blueGray100"
+      flex={1}
+      marginTop={"$20"}
+      flexDirection="column"
+    >
+      <ScrollView>
+      <VStack backgroundColor="$blueGray100" width={"$full"} mb={"$10"}>
+
+        <Text
+          fontSize={"$xl"}
+          alignSelf="center"
+          marginTop={"$5"}
+          fontWeight="$bold"
+        >
+          {profile?.nama}
+        </Text>
+      </VStack>
+      <Box
+        flexDirection="column"
+        bgColor="$white"
+        shadowColor="$black"
+        shadowOffset={{ width: 0, height: 2 }}
+        shadowOpacity={"$25"}
+        shadowRadius={"$3.5"}
+        justifyContent="space-evenly"
+        p={"$5"}
+        borderRadius={"$xl"}
+      >
+        <Text color="$black" fontWeight="$bold" fontSize={"$xl"}>
+          Data Diri
+        </Text>
+        <Box mt={"$5"}>
+          <Text color="$black" fontSize={"$sm"}>
+            Email
+          </Text>
+          <Text color="$black" fontSize={"$xl"} mt={"$2"}>
+            {profile?.email}
+          </Text>
         </Box>
-        <Center flex={1}>
-          <Box width="95%" mt="20">
-            <Text fontSize="15" fontWeight="bold" ml="5">
-              Nama :
-            </Text>
-            <Input
-              mb="3"
-              alignSelf="center"
-              borderRadius="15"
-              height="50"
-              width="100%"
-              placeholder="Nama Lengkap"
-            />
-            <Text fontSize="15" fontWeight="bold" ml="5">
-              Alamat Email :
-            </Text>
-            <Input
-              mb="3"
-              alignSelf="center"
-              borderRadius="15"
-              height="50"
-              width="100%"
-              placeholder="Email"
-            />
-            <Text fontSize="15" fontWeight="bold" ml="5">
-              Password :
-            </Text>
-            <Input
-              mb="3"
-              alignSelf="center"
-              borderRadius="15"
-              height="50"
-              width="100%"
-              placeholder="Password"
-              type={showPassword ? 'text' : 'password'}
-              InputRightElement={
-                <Pressable onPress={togglePasswordVisibility}>
-                  <Icon
-                    as={
-                      <MaterialIcons
-                        name={showPassword ? 'visibility' : 'visibility-off'}
-                      />
-                    }
-                    size={5}
-                    mr="2"
-                    color="muted.400"
-                  />
-                </Pressable>
-              }
-            />
-            <Button
-              onPress={() => navigation.navigate("Edit Profile")}
-              bg="#FAA70A"
-              width="100%"
-              borderRadius="15"
-              mt="5"
-            >
-              Edit Profile
-            </Button>
-          </Box>
-        </Center>
+        <Box mt={"$5"}>
+          <Text color="$black" fontSize={"$sm"}>
+            Nomor Ponsel
+          </Text>
+          <Text color="$black" fontSize={"$xl"} mt={"$2"}>
+            {profile?.nohp}
+          </Text>
+        </Box>
       </Box>
-    </NativeBaseProvider>
+      <Button
+        type="text"
+        title={profile ? "Edit Profile" : "Editprofile"}
+        padding={"$3"}
+        onPress={() => onSubmit(profile)}
+      />
+      <Button
+        type="text"
+        title={profile ? "Logout" : "login"}
+        padding={"$3"}
+        onPress={() => onSubmit(profile)}
+      />
+      </ScrollView>
+    </Box>
   );
 };
 
