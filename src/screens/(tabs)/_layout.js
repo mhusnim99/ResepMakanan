@@ -7,6 +7,7 @@ import Home from "./HomeScreen";
 import Save from "../(tabs)/save";
 import Profile from "../(tabs)/profile";
 import Kategori from "../(tabs)/kategori";
+// import Favorite from "./(tabs)/favorit";
 
 
 // Navigator Declaration
@@ -60,7 +61,7 @@ const Tabs = () => {
       <Tab.Screen name="Kategori" component={Kategori} options={noHead} />
       <Tab.Screen name="Save" component={Save} options={noHead} />
       <Tab.Screen name="Profile" component={Profile} options={noHead} />
-      <Tab.Screen name="Favorit" component={Favorit} options={noHead} />
+      {/* <Tab.Screen name="Favorite" component={Favorite} options={noHead} /> */}
     </Tab.Navigator>
   );
 };

@@ -8,7 +8,7 @@ const EditProfile = () => {
 
   return (
     <ScrollView>
-      <Box flex={1} bg='#FAF8ED'>
+      <Box >
         <Box flex={1} bg='#FAF8ED' p={10} alignItems='center'>
           <Pressable onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 40, left: 20, zIndex: 1 }}>
             <Icon as={Ionicons} name="arrow-back" size={10} color="black" />
@@ -61,9 +61,9 @@ const EditProfile = () => {
                         />
                 </FormControl>
             </Box>
-            <Box alignItems="center" p={38} >
+            <Box alignItems="center" >
                 <Button bg='#FAF8ED' borderRadius={15} >
-                <Text color='#FAA70A'>Update Profile</Text>
+                  <Text color='#FAA70A'>Update Profile</Text>
                 </Button>
             </Box>
         </Box>

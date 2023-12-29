@@ -11,6 +11,7 @@ import Profile from './(tabs)/profile';
 import EditProfile from './(tabs)/editprofile';
 import List from './(tabs)/listResto';
 
+
 const Stack = createNativeStackNavigator();
 const noHead = { headerShown: false };
 
@@ -25,7 +26,7 @@ function MyStack() {
             <Stack.Screen name='Ingredient' component={Ingredient} options={noHead}/>
             <Stack.Screen name='Recipe' component={Recipe} options={noHead}/>
             <Stack.Screen name="Profile" component={Profile} options={noHead} />
-            <Stack.Screen name="Edit Profile" component={EditProfile} options={noHead} />
+            <Stack.Screen name="Edit Profile" component={EditProfile} options={noHead}/>
             <Stack.Screen name="List Restaurant" component={List} options={noHead} />
         </Stack.Navigator>
     </NavigationContainer>
