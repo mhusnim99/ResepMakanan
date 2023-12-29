@@ -42,10 +42,6 @@ const ListResep = ({ route }) => {
           <Heading size="md" marginBottom={2}>
             {item.title}
           </Heading>
-          <Text fontSize="sm" color="gray.500">
-            Kalori: {item.kalori}
-          </Text>
-          {/* Add other recipe details as needed */}
         </Box>
       </Box>
     </TouchableOpacity>
