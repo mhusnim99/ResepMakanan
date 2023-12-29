@@ -3,40 +3,7 @@ import { Box, VStack, HStack, Text, Image, Button, FlatList, Pressable, Icon } f
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
-const datas= [
-    {
-        id: 1,
-        image: require('../../../assets/resto1.png'),
-        nama: "The Dining - Chamas Brazilian Churrascaria",
-        Alamat: "Vasa Hotel Surabaya, Jl. Mayjen HR. Muhammad No.31, Putat Gede, Kec. Sukomanunggal, Surabaya, Jawa Timur 60189"
-    },
-    {
-        id: 2,
-        image: require('../../../assets/resto2.png'),
-        nama: "Pavillion Restaurant",
-        Alamat: "JW Marriott Surabaya, JL. Embong Malang No. 85-89, 60261, Kedungdoro, Kec. Tegalsari, Surabaya, Jawa Timur 60261"
-    },
-    {
-        id: 3,
-        image: require('../../../assets/resto3.png'),
-        nama: "Seventeen Restaurant & Lounge Surabaya",
-        Alamat: "Harris Hotel & Conventions, Lantai 17Jl. Bangka No. 8 - 18, Gubeng, Surabaya"
-    },
-    {
-        id: 4,
-        image: require('../../../assets/resto4.png'),
-        nama: "Kayu Contemporary Japanese Restaurant",
-        Alamat: "Srijaya, Jl. Mayjen Sungkono No.212-214, Putat Gede, Kec. Sukomanunggal, Surabaya, Jawa Timur 60189"
-    },
-    {
-        id: 5,
-        image: require('../../../assets/resto5.png'),
-        nama: "Magnolia Restaurant at Westin Surabaya",
-        Alamat: "Westin Surabaya, Jalan Puncak Indah Jl. Raya Lontar No.2, Surabaya, Jawa Timur 60216"
-    },
-
-]
+import restaurant from "../../dummy/restaurant"; 
 
 const List = () => {
     const navigation = useNavigation(); 
@@ -55,7 +22,7 @@ const List = () => {
                     <HStack space={3}>
                         <Box width="40%">
                             <Image
-                                source={item.image}
+                                source={{ uri: item.image }}
                                 alt={item.name}
                                 width= '100%'
                                 h= {150}       
@@ -81,22 +48,14 @@ const List = () => {
     return (
         <>
         <SafeAreaView>
-            <Box flex={1} bg='#FAF8ED' p={10} alignItems='center' marginBottom={10}>
-                <Pressable onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 10, left: 20, zIndex: 1 }}>
-                    <Icon as={Ionicons} name="arrow-back" size={10} color="black" />
-                </Pressable>
-                <Button marginBottom={"10"} backgroundColor='#FAA70A' width={"252"} height={"60"} fontWeight={"extraBlack"} size={"lg"} borderRadius={10}>
-                <Text color='white' fontSize={18}>List Restaurant</Text>
-                </Button>
-            </Box>
-            {/* <Box alignItems="center" bgColor='#FAF8ED'>
-                <Button marginBottom={"5"} backgroundColor='#FAA70A' width={"252"} height={"60"} fontWeight={"extraBlack"} size={"lg"} borderRadius={10}>
-                <Text color='white' fontSize={18}>List Restaurant</Text>
-                </Button>
-            </Box> */}
-        </SafeAreaView>
+        <Box alignItems="center" bgColor='#FAF8ED' >
+          <Button marginTop={"5"} marginBottom={"5"} backgroundColor={"yellow.500"} width={"252"} height={"46"} fontWeight={"extraBlack"} size={"lg"} >
+            <Text color='white' fontSize={18}>LIST RESTAURANT</Text>
+          </Button>
+        </Box>
+      </SafeAreaView>
         <FlatList
-          data={datas}
+          data={restaurant}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}

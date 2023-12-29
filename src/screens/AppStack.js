@@ -10,7 +10,11 @@ import Recipe from './(tabs)/Recipe';
 import Profile from './(tabs)/profile';
 import EditProfile from './(tabs)/editprofile';
 import List from './(tabs)/listResto';
-
+=========
+import Profile from './(tabs)/Profile';
+import Kalorirendah from './(tabs)/Kalorirendah';
+import Kaloritinggi from './(tabs)/Kaloritinggi';
+>>>>>>>>> Temporary merge branch 2
 
 const Stack = createNativeStackNavigator();
 const noHead = { headerShown: false };
@@ -26,8 +30,13 @@ function MyStack() {
             <Stack.Screen name='Ingredient' component={Ingredient} options={noHead}/>
             <Stack.Screen name='Recipe' component={Recipe} options={noHead}/>
             <Stack.Screen name="Profile" component={Profile} options={noHead} />
-            <Stack.Screen name="Edit Profile" component={EditProfile} options={noHead}/>
+<<<<<<<<< Temporary merge branch 1
+            <Stack.Screen name="Edit Profile" component={EditProfile} options={noHead} />
             <Stack.Screen name="List Restaurant" component={List} options={noHead} />
+=========
+            <Stack.Screen name="Kalorirendah" component={Kalorirendah} options={noHead} />
+            <Stack.Screen name="Kaloritinggi" component={Kaloritinggi} options={noHead} />
+>>>>>>>>> Temporary merge branch 2
         </Stack.Navigator>
     </NavigationContainer>
   );
