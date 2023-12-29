@@ -1,70 +1,123 @@
-import React, { useState } from 'react';
-import { Box, Heading, Input, Button, Text, FormControl,} from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-// import Login from './login';
 
-const SignUp = () => {
+import React, { useState } from "react";
+import {
+  Box,
+  Alert,
+  FormControl,
+  Text,
+  Modal,
+  ModalBackdrop,
+  AlertText,
+} from "@gluestack-ui/themed";
+import { Input, Button } from "../components";
+import { registerUser } from "../actions/AuthAction";
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    console.log('Email:', email);
-    console.log('Password:', password);
+const Register = ({ navigation }) => {
+  const [nama, setNama] = useState("");
+  const [email, setEmail] = useState("");
+  const [nohp, setNohp] = useState("");
+  const [password, setPassword] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const toggleAlert = (message) => {
+    setShowAlert(!showAlert);
+    setAlertMessage(message);
   };
 
-  const navigation = useNavigation();
+  const onRegister = async () => {
+    if (nama && email && nohp && password) {
+      const data = {
+        nama: nama,
+        email: email,
+        nohp: nohp,
+        status: "user",
+      };
+
+      console.log(data);
+
+      try {
+        const user = await registerUser(data, password);
+        navigation.replace("Login");
+      } catch (error) {
+        console.log("Error", error.message);
+        toggleAlert(error.message);
+      }
+    } else {
+      console.log("Error", "Data tidak lengkap");
+      toggleAlert("Tolong Lengkapi Data");
+    }
+  };
 
   return (
-      <Box flex={1} p={4} alignItems='center' justifyContent='center' bg='#FAA70A'>
-        <Heading 
-        paddingBottom={50}
-        color= "#FAF8ED"
-        fontSize="33"
-        >Sign Up</Heading>
-        <FormControl p={10} paddingBottom={0.10}>
-          <FormControl.Label>Name</FormControl.Label>
+    <Box flex={1} backgroundColor="$yellow400" justifyContent="center">
+      <Box
+        backgroundColor="$yellow400"
+        borderRadius={"$md"}
+        marginTop={"$10"}
+        marginHorizontal={"$6"}
+        p={"$5"}
+      >
+        <Text size="3xl" color="$white" fontWeight="bold">
+          Register
+        </Text>
+        <FormControl>
           <Input
-            placeholder="Enter Username"
-            value={name}
-            onChangeText={(text) => setName(text)}
-            mb={2}
-            bgColor='#FAF8ED'
-            borderRadius={15}
+            label="Nama"
+            value={nama}
+            onChangeText={(nama) => setNama(nama)}
+            height={"$10"}
+            backgroundColor="$white"
           />
-        </FormControl>
-        <FormControl p={10} paddingBottom={0.10}>
-          <FormControl.Label>Email</FormControl.Label>
           <Input
-            placeholder="Enter Email"
+            label="Email"
             value={email}
-            onChangeText={(text) => setEmail(text)}
-            mb={2}
-            bgColor='#FAF8ED'
-            borderRadius={15}
+            onChangeText={(email) => setEmail(email)}
+            height={"$10"}
           />
-        </FormControl>
-        <FormControl p={10}>
-          <FormControl.Label>Password</FormControl.Label>
           <Input
-            placeholder="Enter Password"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            secureText
-            mb={2}
-            bgColor='#FAF8ED'
-            borderRadius={15}
+            label="No. Handphone"
+            keyboardType="phone-pad"
+            value={nohp}
+            onChangeText={(nohp) => setNohp(nohp)}
+            height={"$10"}
           />
-          <Text mt={2} >Already have an account?<Text color="blue.500" onPress={()=> navigation.navigate('Login')}>Login</Text></Text>
+          <Input
+            label="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={(password) => setPassword(password)}
+            height={"$10"}
+          />
         </FormControl>
-        <Box alignItems="center" p={30} borderRadius={15} >
-            <Button bg='#FAF8ED' borderRadius={15} >
-                <Text color='#FAA70A' fontSize={17}>Sign Up</Text>
-            </Button>
+        <Box flexDirection="column" my={"$5"}>
+          <Button
+            title="Register"
+            type="text"
+            icon="submit"
+            padding={"$3"}
+            fontSize={"$md"}
+            onPress={() => {
+              onRegister();
+            }}
+          />
         </Box>
       </Box>
+
+      {/* show Alert */}
+      {showAlert && (
+        <Modal isOpen={showAlert} onClose={() => toggleAlert()}>
+          <ModalBackdrop />
+          <Alert mx="$4" action="error" variant="solid">
+            <AlertText fontWeight="$bold">Error!</AlertText>
+            <AlertText>{alertMessage}</AlertText>
+          </Alert>
+        </Modal>
+      )}
+    </Box>
   );
 };
 
-export default SignUp;
+export default Register;
+
