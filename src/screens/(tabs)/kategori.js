@@ -115,13 +115,14 @@ const Kategori = () => {
   return (
     <>
       <SafeAreaView>
-        <Box alignItems="center">
+        <Box alignItems="center" bgColor='#FAF8ED'>
           <Button marginTop={"5"} marginBottom={"5"} backgroundColor={"yellow.500"} width={"252"} height={"46"} fontWeight={"extraBlack"} size={"lg"} >
             <Text color='white' fontSize={18}>Kategori</Text>
           </Button>
         </Box>
       </SafeAreaView>
       <FlatList
+        bgColor='#FAF8ED'
         data={datas}
         renderItem={({ item }) => {
           switch (item.halaman) {

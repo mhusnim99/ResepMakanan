@@ -1,45 +1,34 @@
-const content =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida, orci nec feugiat commodo, ipsum orci consequat nulla, non sodales sem lorem et ante. Etiam dignissim tempor elit, nec feugiat ante suscipit eget. Sed imperdiet diam at ultrices viverra. Duis malesuada mattis tortor, ac ultrices elit euismod a.\n\nSuspendisse tincidunt eleifend volutpat. Phasellus vehicula sapien eu aliquam dignissim. Duis diam lorem, porta id nisi a, interdum rutrum quam. Suspendisse tincidunt euismod nunc. Etiam interdum, sem tincidunt sodales dignissim, orci ligula hendrerit dolor, ac suscipit neque eros sit amet magna. Sed gravida porttitor justo in venenatis. Maecenas dolor odio, semper eu velit pharetra, euismod placerat lectus. Curabitur nec aliquam mi. Aliquam suscipit iaculis vestibulum. Integer nibh ante, dignissim sed convallis eget, elementum ut nunc. Fusce non pharetra enim. Etiam ut justo est. Morbi commodo bibendum lorem a condimentum. Nulla ut magna tempor neque fringilla auctor. Ut aliquam ipsum urna, sodales ultricies ipsum pulvinar ac.\n\nNullam ultrices egestas dapibus. Vivamus sodales, nisl vel lobortis vestibulum, elit libero venenatis mauris, ut efficitur augue turpis ac lorem. Duis eu hendrerit ligula. Mauris auctor, purus ut ornare condimentum, ligula nisi egestas erat, eu fermentum libero massa tincidunt turpis. Suspendisse porta luctus elit eu pellentesque. Vivamus feugiat pellentesque hendrerit. Duis eu vulputate urna, quis bibendum nulla.\n\nPhasellus et faucibus elit, mollis accumsan arcu. Fusce scelerisque orci purus, vel scelerisque nisl viverra vitae. Nulla non lectus in lacus mollis consequat. Aenean consequat luctus tristique. Nunc imperdiet condimentum cursus. Praesent vel fermentum est, id pulvinar est. Nunc dolor velit, commodo non vehicula at, tincidunt lobortis mauris. Curabitur laoreet ipsum ut erat interdum ornare.";
+const restaurant= [
+  {
+      id: 1,
+      image: "https://i.pinimg.com/736x/31/e7/90/31e790608f4193d4174a19dd19a4dd33.jpg",
+      nama: "The Dining - Chamas Brazilian Churrascaria",
+      Alamat: "Vasa Hotel Surabaya, Jl. Mayjen HR. Muhammad No.31, Putat Gede, Kec. Sukomanunggal, Surabaya, Jawa Timur 60189"
+  },
+  {
+      id: 2,
+      image: "https://i.pinimg.com/564x/6a/c5/18/6ac51882a62e2c3b6c6d2042c4843f8b.jpg",
+      nama: "Pavillion Restaurant",
+      Alamat: "JW Marriott Surabaya, JL. Embong Malang No. 85-89, 60261, Kedungdoro, Kec. Tegalsari, Surabaya, Jawa Timur 60261"
+  },
+  {
+      id: 3,
+      image: "https://i.pinimg.com/564x/3e/25/17/3e2517c8feb56b84bf7a8d22fea58a8a.jpg",
+      nama: "Seventeen Restaurant & Lounge Surabaya",
+      Alamat: "Harris Hotel & Conventions, Lantai 17Jl. Bangka No. 8 - 18, Gubeng,Surabaya"
+  },
+  {
+      id: 4,
+      image: "https://i.pinimg.com/564x/ea/91/45/ea91458ef5810c3685f735bf6018685a.jpg",
+      nama: "Kayu Contemporary Japanese Restaurant",
+      Alamat: "Srijaya, Jl. Mayjen Sungkono No.212-214, Putat Gede, Kec. Sukomanunggal, Surabaya, Jawa Timur 60189"
+  },
+  {
+      id: 5,
+      image: "https://i.pinimg.com/564x/3a/ff/00/3aff00e0ad909b0454c3dd60241d5c53.jpg",
+      nama: "Magnolia Restaurant at Westin Surabaya",
+      Alamat: "Westin Surabaya, Jalan Puncak Indah Jl. Raya Lontar No.2, Surabaya, Jawa Timur 60216"
+  },
 
-const restaurant = [
-  {
-    id: 1,
-    title:
-      "NELONGSO",
-    image:
-      "https://i.pinimg.com/474x/76/b9/17/76b917ccf56f4996a7e2e578fecd1286.jpg",
-    content: content,
-  },
-  {
-    id: 2,
-    title: "CIPCIP",
-    image:
-      "https://i.pinimg.com/474x/0f/d1/56/0fd15697c25efbfd1d1ea70805047a37.jpg",
-    content: content,
-  },
-  {
-    id: 3,
-    title:
-      "PAK D",
-    image:
-      "https://i.pinimg.com/474x/1e/c5/f1/1ec5f12945dfb741852920016db96fd7.jpg",
-    content: content,
-  },
-  {
-    id: 4,
-    title: "SWK",
-    image:
-      "https://i.pinimg.com/474x/55/3e/87/553e87124d8dd41ec4b798951c0109b9.jpg",
-    content: content,
-  },
-  {
-    id: 5,
-    title:
-      "McDonal's",
-    image:
-      "https://i.pinimg.com/474x/d3/a3/f2/d3a3f2cea62e5ee138b9ab7c7bfbcff5.jpg",
-    content: content,
-  },
-];
-
+]
 export default restaurant;

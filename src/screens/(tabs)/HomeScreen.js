@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Image, Text, Box, View, FlatList, Icon, ScrollView } from "native-base";
+import { Heading, Image, Text, Box, View, FlatList, Icon, ScrollView, HStack, Button} from "native-base";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import resep from "../../dummy/resep";
@@ -61,7 +61,7 @@ const HomeScreen = () => {
             color={"white"}
             bg="#FAA70A"
           >
-            {item.title}
+            {item.nama}
           </Heading>
           <Image
             source={{ uri: item.image }}
@@ -100,19 +100,38 @@ const HomeScreen = () => {
           style={{ width: '250', height: 230, marginTop: 20 }}
         />
         <Box py={"2"} pt={3}>
-          <Text ml={4} fontWeight={700} mb={3}>Resep rekomendasi Untuk Sasa</Text>
+        <HStack>
+            <Box width='78%'>
+              <Text ml={4} fontWeight={700} mb={3}>Resep recomendasi untuk sasa</Text>
+            </Box>
+            <Box width='20%'>
+              <TouchableOpacity onPress={() => navigation.navigate("List Resep")}>
+                <Text color="#4942E4">See All</Text>
+              </TouchableOpacity>
+            </Box>
+          </HStack>
           <FlatList
-            data={resep}
+            data={resep.slice(0, 7)}
             renderItem={renderRecipeItem}
             keyExtractor={(item) => item.id.toString()}
             showsVerticalScrollIndicator={false}
-            horizontal={true} 
+            horizontal={true}
           />
         </Box>
         <Box py={"2"} pt={2}>
-          <Text ml={4} fontWeight={700} mb={3}>Restaurant Recommendations</Text>
+          <HStack>
+            <Box width='78%'>
+              <Text ml={4} fontWeight={700} mb={3}>Restaurant Recommendations</Text>
+            </Box>
+            <Box width='20%'>
+              <TouchableOpacity onPress={() => navigation.navigate("List Restaurant")}>
+                <Text color="#4942E4">See All</Text>
+              </TouchableOpacity>
+            </Box>
+          </HStack>
           <FlatList
             data={restaurants}
+            data={restaurants.slice(0, 5)}
             renderItem={renderRestaurantItem}
             keyExtractor={(item) => item.id.toString()}
             showsVerticalScrollIndicator={false}
