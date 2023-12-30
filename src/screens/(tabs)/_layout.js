@@ -3,10 +3,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider, Text, useKeyboardBottomInset } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Home from "../(tabs)/home";
+import Home from "./HomeScreen";
 import Save from "../(tabs)/save";
 import Profile from "../(tabs)/profile";
 import Kategori from "../(tabs)/kategori";
+import Favorit from "../(tabs)/favorit";
 
 
 // Navigator Declaration
@@ -32,6 +33,9 @@ const Tabs = () => {
               break;
             case "Profile":
               iconName = "person-outline";
+              break;
+            case "Favorit":
+              iconName = "bookmark-outline";
               break;
           }
           return (
