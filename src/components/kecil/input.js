@@ -20,11 +20,11 @@ const Input = ({ dropdown, textarea, width, height, fontSize, label, value, secu
 
   return (
     <>
-      <FormControlLabel marginTop={"$5"} flexDirection="column" alignItems="left">
+      <FormControlLabel marginTop={"$1"} flexDirection="column" alignItems="left">
         <Text fontSize={fontSize ? fontSize : "$md"} fontWeight="bold" mb={"$2"}>
           {label}
         </Text>
-        <GlueInput width={width} height={height} borderWidth={"$1"} borderRadius={"$sm"} borderColor={"$warmGray500"}>
+        <GlueInput width={width} height={"$10"} borderWidth={"$1"} borderRadius={"$md"} borderColor={"$warmGray500"} backgroundColor="$white">
           <InputField secureTextEntry={secureTextEntry} value={value} keyboardType={keyboardType} onChangeText={onChangeText} editable={disabled ? false : true} />
         </GlueInput>
       </FormControlLabel>

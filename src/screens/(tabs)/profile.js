@@ -101,11 +101,13 @@ const Profile = ({ navigation }) => {
         </Box>
       </Box>
       <Button
-        type="text"
-        title={profile ? "Edit Profile" : "Editprofile"}
-        padding={"$3"}
-        onPress={() => onSubmit(profile)}
-      />
+            title="Edit Profile"
+            type="text"
+            padding={"$3"}
+            onPress={() => {
+              navigation.navigate("Edit Profile");
+            }}
+          />
       <Button
         type="text"
         title={profile ? "Logout" : "login"}
