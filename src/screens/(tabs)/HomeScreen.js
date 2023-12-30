@@ -111,7 +111,7 @@ const HomeScreen = () => {
             </Box>
           </HStack>
           <FlatList
-            data={resep.slice(0, 7)}
+            data={resep.slice(0, 40)}
             renderItem={renderRecipeItem}
             keyExtractor={(item) => item.id.toString()}
             showsVerticalScrollIndicator={false}
