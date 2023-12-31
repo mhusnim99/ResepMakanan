@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { GluestackUIProvider } from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config";
 import Register from './register';
 import Login from './login';
 import Tabs from './(tabs)/_layout';
@@ -10,15 +12,17 @@ import Recipe from './(tabs)/Recipe';
 import Profile from './(tabs)/profile';
 import EditProfile from './(tabs)/editprofile';
 import List from './(tabs)/listResto';
-import Kaloritinggi from './(tabs)/kaloritinggi';
-import Kalorirendah from './(tabs)/kalorirendah';
+import Kaloritinggi from './(tabs)/Kaloritinggi';
+import Kalorirendah from './(tabs)/Kalorirendah';
+import ListResep from './(tabs)/listresep';
 
 const Stack = createNativeStackNavigator();
 const noHead = { headerShown: false };
 
 function MyStack() {
   return (
-    <NavigationContainer>
+    <GluestackUIProvider config={config}>
+      <NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="Login" component={Login} options={noHead} />
             <Stack.Screen name="Register" component={Register} options={noHead} />
@@ -32,7 +36,8 @@ function MyStack() {
             <Stack.Screen name="Kalorirendah" component={Kalorirendah} options={noHead} />
             <Stack.Screen name="Kaloritinggi" component={Kaloritinggi} options={noHead} />
         </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
+    </GluestackUIProvider>
   );
 }
 
