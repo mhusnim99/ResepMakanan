@@ -15,6 +15,7 @@ import List from './(tabs)/listResto';
 import Kaloritinggi from './(tabs)/kaloritinggi';
 import Kalorirendah from './(tabs)/kalorirendah';
 import ListResep from './(tabs)/listresep';
+import Ulasan from './(tabs)/ulasan';
 
 const Stack = createNativeStackNavigator();
 const noHead = { headerShown: false };
@@ -36,6 +37,7 @@ function MyStack() {
             <Stack.Screen name="Edit Profile" component={EditProfile} options={noHead} />
             <Stack.Screen name="List Restaurant" component={List} options={noHead} />
             <Stack.Screen name="List Resep" component={ListResep} options={noHead} />
+            <Stack.Screen name="Ulasan" component={Ulasan} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Heading, Text, FormControl } from 'native-base';
+import { Box, Heading, Text, FormControl, Center} from 'native-base';
 import {
   Alert,
   Modal,
@@ -38,11 +38,15 @@ const Login = ({ navigation }) => {
 
   return (
     <Box flex={1} p={4} alignItems='center' justifyContent='center' bg='#FAA70A'>
-      <Heading
-        paddingBottom={50}
-        color="#FAF8ED"
+      <Box backgroundColor="white" width="360" height="330" borderBottomRadius="120">
+      <Center>
+        <Heading paddingBottom={50}
+        color='#FAA70A'
         fontSize="33"
-      >Login</Heading>
+        marginTop="150"
+        >Login</Heading>
+      </Center>
+      </Box>
       <FormControl p={10} paddingBottom={0.10}>
         <Heading color="grey" fontSize="20" >Email</Heading>
         <Input

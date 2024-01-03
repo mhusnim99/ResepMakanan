@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Heading, Box, Text, Image, ScrollView, HStack, Checkbox, Button, Icon, Pressable } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Ingredient = ({ route }) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [isLoved, setIsLoved] = useState(false);
   const navigation = useNavigation();
   const params = route.params.item;
+
+  // Load saved ingredients on component mount
+  useEffect(() => {
+    const loadSavedIngredients = async () => {
+      try {
+        const savedIngredientsJSON = await AsyncStorage.getItem("selectedIngredients");
+        if (savedIngredientsJSON) {
+          const savedIngredients = JSON.parse(savedIngredientsJSON);
+          setSelectedIngredients(savedIngredients);
+        }
+      } catch (error) {
+        console.error("Error loading saved ingredients:", error.message);
+      }
+    };
+
+    loadSavedIngredients();
+  }, []);
 
   const handleCheckboxChange = (value) => {
     // Toggle checkbox value in selectedIngredients
@@ -16,6 +34,16 @@ const Ingredient = ({ route }) => {
       : [...selectedIngredients, value];
 
     setSelectedIngredients(updatedIngredients);
+  };
+
+  const handleSave = async () => {
+    try {
+      // Save selected ingredients to AsyncStorage
+      await AsyncStorage.setItem("selectedIngredients", JSON.stringify(selectedIngredients));
+      console.log("Selected Ingredients saved successfully!");
+    } catch (error) {
+      console.error("Error saving selected ingredients:", error.message);
+    }
   };
 
   return (
@@ -68,11 +96,19 @@ const Ingredient = ({ route }) => {
           >
             Watch Recipe
           </Button>
-
+          <Button
+            size="lg"
+            borderRadius={10}
+            mr={5}
+            onPress={() => navigation.navigate("Ulasan", { params: params })}
+            bg="#FAA70A"
+          >
+            Review
+          </Button>
           <Button
             size={"lg"}
             borderRadius={50}
-            onPress={() => setIsLoved(!isLoved)}
+            onPress={handleSave}
             bg="#FAA70A"
           >
             <Icon as={Ionicons} color={isLoved ? "#FFFFFF" : "#F8F6EB"} name="heart" />

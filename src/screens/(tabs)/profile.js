@@ -1,6 +1,5 @@
-
-import React, { useState, useEffect } from "react";
-import { Box, Text, Image, VStack, ScrollView } from "@gluestack-ui/themed";
+import React, { useState, useEffect } from 'react';
+import { Box, Center, Text, Pressable, Input, Icon, FormControl, ScrollView } from 'native-base';
 import { Button } from "../../components";
 import { clearStorage, getData } from "../../utils";
 import FIREBASE from "../../config/FIREBASE";
@@ -49,73 +48,55 @@ const Profile = ({ navigation }) => {
   };
 
   return (
-    <Box
-      mt={"$5"}
-      mx={"$5"}
-      backgroundColor="$blueGray100"
-      flex={1}
-      marginTop={"$20"}
-      flexDirection="column"
-    >
-      <ScrollView>
-      <VStack backgroundColor="$blueGray100" width={"$full"} mb={"$10"}>
-
-        <Text
-          fontSize={"$xl"}
-          alignSelf="center"
-          marginTop={"$5"}
-          fontWeight="$bold"
-        >
-          {profile?.nama}
-        </Text>
-      </VStack>
-      <Box
-        flexDirection="column"
-        bgColor="$white"
-        shadowColor="$black"
-        shadowOffset={{ width: 0, height: 2 }}
-        shadowOpacity={"$25"}
-        shadowRadius={"$3.5"}
-        justifyContent="space-evenly"
-        p={"$5"}
-        borderRadius={"$xl"}
-      >
-        <Text color="$black" fontWeight="$bold" fontSize={"$xl"}>
-          Data Diri
-        </Text>
-        <Box mt={"$5"}>
-          <Text color="$black" fontSize={"$sm"}>
-            Email
-          </Text>
-          <Text color="$black" fontSize={"$xl"} mt={"$2"}>
-            {profile?.email}
-          </Text>
+    <ScrollView>
+      <Box>
+        <Box borderBottomRadius="120" height="25%" bg="#FAA70A">
+          <Center>
+            <Text mt="60" fontSize="30" color="white" fontWeight="bold">
+              Profil Pengguna
+            </Text>
+          </Center>
         </Box>
-        <Box mt={"$5"}>
-          <Text color="$black" fontSize={"$sm"}>
-            Nomor Ponsel
-          </Text>
-          <Text color="$black" fontSize={"$xl"} mt={"$2"}>
-            {profile?.nohp}
-          </Text>
-        </Box>
+          <Box>
+            <FormControl p={30} >
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.nama}</Input>
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.umur}</Input>
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.tb}</Input>
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.bb}</Input>
+              <Button
+              type="text"
+              title={profile ? "Logout" : "login"}
+              padding={"$3"}
+              onPress={() => onSubmit(profile)}
+            />
+            <Button
+              title="Edit Profile"
+              type="text"
+              padding={"$4"}
+              onPress={() => navigation.navigate('Edit Profile')}
+            />
+            </FormControl>
+            
+            
+          </Box>
       </Box>
-      <Button
-            title="Edit Profile"
-            type="text"
-            padding={"$3"}
-            onPress={() => {
-              navigation.navigate("Edit Profile");
-            }}
-          />
-      <Button
-        type="text"
-        title={profile ? "Logout" : "login"}
-        padding={"$3"}
-        onPress={() => onSubmit(profile)}
-      />
-      </ScrollView>
-    </Box>
+    </ScrollView>
   );
 };
 
