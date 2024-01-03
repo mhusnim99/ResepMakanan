@@ -79,7 +79,7 @@ const EditProfile = ({ route, navigation }) => {
             <Icon as={Ionicons} name="arrow-back" size={10} color="black" />
           </Pressable>
         </Box>
-        <Box flex={1} bg='#FAF8ED' p={30} alignItems='center'>
+        <Box bg='#FAF8ED' mt={20} mb={20} alignItems='center'>
           <Center
             bg="#FAA70A"
             _text={{
