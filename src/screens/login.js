@@ -1,14 +1,12 @@
 import React, { useState } from "react";
+import { Box, Heading, Text, FormControl, Center} from 'native-base';
 import {
   Alert,
-  Box,
-  Text,
-  FormControl,
-  Heading,
-  AlertText,
   Modal,
   ModalBackdrop,
+  AlertText,
 } from "@gluestack-ui/themed";
+import { useNavigation } from '@react-navigation/native';
 import { Input, Button } from "../components";
 import { loginUser } from "../actions/AuthAction"
 
@@ -39,56 +37,47 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <Box flex={1} backgroundColor="$yellow500" justifyContent="center">
-      <Box
-        backgroundColor="$yellow500"
-        marginTop={"$1"}
-        marginHorizontal={"$6"}
-        p={"$1"}
-      >
-        <Heading ml={"$24"} size="3xl" color="$white">
-          Login
-        </Heading>
-        <FormControl>
-          <Input
-            label={"Email"}
-            borderRadius={"$md"}
-            width={"$full"}
-            height={"$10"}
-            onChangeText={(text) => setEmail(text)} // Set email ke dalam state
-            value={email}
-            style={{ backgroundColor: 'white' }}
-          />
-          <Input
-            label="Password"
-            width={"$full"}
-            height={"$10"}
-            secureTextEntry={true}
-            onChangeText={(text) => setPassword(text)} // Set password ke dalam state
-            value={password}
-          />
-        </FormControl>
-        <Box flexDirection="column" my={"$5"}>
-          <Button
-            title="Login"
-            type="text"
-            padding={"$3"}
-            onPress={() => login()}
-          />
-          <Text size="sm" color="$black" mt={"$4"}>
-            Don't have an account?
-          </Text>
-          <Button
-            title="Register"
-            type="text"
-            padding={"$3"}
-            onPress={() => {
-              navigation.navigate("Register");
-            }}
-          />
-        </Box>
+    <Box flex={1} p={4} alignItems='center' justifyContent='center' bg='#FAA70A'>
+      <Box backgroundColor="white" width="360" height="330" borderBottomRadius="120">
+      <Center>
+        <Heading paddingBottom={50}
+        color='#FAA70A'
+        fontSize="33"
+        marginTop="150"
+        >Login</Heading>
+      </Center>
       </Box>
-
+      <FormControl p={10} paddingBottom={0.10}>
+        <Heading color="grey" fontSize="20" >Email</Heading>
+        <Input
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          bgColor='#FAF8ED'
+          borderRadius={15}
+        />
+      </FormControl>
+      <FormControl p={10}>
+      <Heading color="grey" fontSize="20">Kata Sandi</Heading>
+        <Input
+          placeholder="Kata Sandi"
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          secureText
+          mb={2}
+          bgColor='#FAF8ED'
+          borderRadius={15}
+        />
+        <Text mt={2} >Don't have an account ?<Text color="blue.500" onPress={() => navigation.navigate('Register')}> Register Here</Text></Text>
+      </FormControl>
+      <Box alignItems="center" borderRadius={15} >
+        <Button
+          title="Login"
+          type="text"
+          padding={"$4"}
+          onPress={() => login()}
+        />
+      </Box>
       {/* show Alert */}
       {showAlert && (
         <Modal isOpen={showAlert} onClose={() => toggleAlert()}>

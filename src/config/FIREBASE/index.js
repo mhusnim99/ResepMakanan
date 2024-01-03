@@ -14,6 +14,7 @@ firebase.initializeApp({
   measurementId: "G-3ST24B4SV9"
 });
 
+
 const FIREBASE = firebase;
 
 export default FIREBASE;

@@ -1,10 +1,8 @@
 
 import React, { useState } from "react";
+import { Box, Heading, Text, FormControl, Center, ScrollView} from 'native-base';
 import {
-  Box,
   Alert,
-  FormControl,
-  Text,
   Modal,
   ModalBackdrop,
   AlertText,
@@ -15,8 +13,10 @@ import { registerUser } from "../actions/AuthAction";
 
 const Register = ({ navigation }) => {
   const [nama, setNama] = useState("");
-  const [email, setEmail] = useState("");
-  const [nohp, setNohp] = useState("");
+  const [email, setEmail] = useState("");;
+  const [umur, setumur] = useState("");;
+  const [tb, settb] = useState("");;
+  const [bb, setbb] = useState("");;
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -27,11 +27,13 @@ const Register = ({ navigation }) => {
   };
 
   const onRegister = async () => {
-    if (nama && email && nohp && password) {
+    if (nama && email && password && umur && tb && bb) {
       const data = {
         nama: nama,
         email: email,
-        nohp: nohp,
+        umur : umur,
+        tb : tb,
+        bb : bb,
         status: "user",
       };
 
@@ -51,49 +53,88 @@ const Register = ({ navigation }) => {
   };
 
   return (
-    <Box flex={1} backgroundColor="$yellow400" justifyContent="center">
-      <Box
-        backgroundColor="$yellow400"
-        borderRadius={"$md"}
-        marginTop={"$10"}
-        marginHorizontal={"$6"}
-        p={"$5"}
-      >
-        <Text size="3xl" color="$white" fontWeight="bold">
-          Register
-        </Text>
-        <FormControl>
+    <ScrollView>
+    <Box flex={1} alignItems='center' justifyContent='center' bg='#FAA70A'>
+        <Box backgroundColor="white" width="360" height="330" borderBottomRadius="120">
+      <Center>
+        <Heading paddingBottom={50}
+        color='#FAA70A'
+        fontSize="33"
+        marginTop="150"
+        >SignUp</Heading>
+      </Center>
+      </Box>
+        <FormControl p={10} paddingBottom={0.10}>
+        <Heading color="grey" fontSize="20" >Nama</Heading>
           <Input
-            label="Nama"
+            placeholder="Enter Email"
             value={nama}
-            onChangeText={(nama) => setNama(nama)}
-            height={"$10"}
-            backgroundColor="$white"
-          />
-          <Input
-            label="Email"
-            value={email}
-            onChangeText={(email) => setEmail(email)}
-            height={"$10"}
-          />
-          <Input
-            label="No. Handphone"
-            keyboardType="phone-pad"
-            value={nohp}
-            onChangeText={(nohp) => setNohp(nohp)}
-            height={"$10"}
-          />
-          <Input
-            label="Password"
-            secureTextEntry
-            value={password}
-            onChangeText={(password) => setPassword(password)}
-            height={"$10"}
+            onChangeText={(text) => setNama(text)}
+            mb={2}
+            bgColor='#FAF8ED'
+            borderRadius={15}
           />
         </FormControl>
-        <Box flexDirection="column" my={"$5"}>
+        <FormControl p={10} paddingBottom={0.10}>
+        <Heading color="grey" fontSize="20" >Umur</Heading>
+          <Input
+            placeholder="Enter Uur"
+            value={umur}
+            onChangeText={(text) => setumur(text)}
+            mb={2}
+            bgColor='#FAF8ED'
+            borderRadius={15}
+          />
+        </FormControl>
+        <FormControl p={10} paddingBottom={0.10}>
+        <Heading color="grey" fontSize="20" >Tinggi Badan</Heading>
+          <Input
+            placeholder="Enter Tinggi Badan"
+            value={tb}
+            onChangeText={(text) => settb(text)}
+            mb={2}
+            bgColor='#FAF8ED'
+            borderRadius={15}
+          />
+        </FormControl>
+        <FormControl p={10} paddingBottom={0.10}>
+        <Heading color="grey" fontSize="20" >Berat Badan</Heading>
+          <Input
+            placeholder="Enter Berat Badan"
+            value={bb}
+            onChangeText={(text) => setbb(text)}
+            mb={2}
+            bgColor='#FAF8ED'
+            borderRadius={15}
+          />
+        </FormControl>
+        <FormControl p={10} paddingBottom={0.10}>
+        <Heading color="grey" fontSize="20" >Email</Heading>
+          <Input
+            placeholder="Enter Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            mb={2}
+            bgColor='#FAF8ED'
+            borderRadius={15}
+          />
+        </FormControl>
+        <FormControl p={10}>
+        <Heading color="grey" fontSize="20" >Password</Heading>
+          <Input
+            placeholder="Enter Password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            secureText
+            mb={2}
+            bgColor='#FAF8ED'
+            borderRadius={15}/>
+            <Text mt={2} >Already have an account?<Text color="blue.500" onPress={() => navigation.navigate('Login')}> Login</Text></Text>
+            </FormControl>  
+            
+        <Box flexDirection="column" my={"$10"}>
           <Button
-            title="Register"
+            title="Sign Up"
             type="text"
             icon="submit"
             padding={"$3"}
@@ -103,8 +144,6 @@ const Register = ({ navigation }) => {
             }}
           />
         </Box>
-      </Box>
-
       {/* show Alert */}
       {showAlert && (
         <Modal isOpen={showAlert} onClose={() => toggleAlert()}>
@@ -116,6 +155,7 @@ const Register = ({ navigation }) => {
         </Modal>
       )}
     </Box>
+    </ScrollView>
   );
 };
 
