@@ -12,8 +12,8 @@ import Recipe from './(tabs)/Recipe';
 import Profile from './(tabs)/profile';
 import EditProfile from './(tabs)/editprofile';
 import List from './(tabs)/listResto';
-import Kaloritinggi from './(tabs)/Kaloritinggi';
-import Kalorirendah from './(tabs)/Kalorirendah';
+import Kaloritinggi from './(tabs)/kaloritinggi';
+import Kalorirendah from './(tabs)/kalorirendah';
 import ListResep from './(tabs)/listresep';
 
 const Stack = createNativeStackNavigator();
