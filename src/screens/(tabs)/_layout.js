@@ -4,10 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider, Text, useKeyboardBottomInset } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Home from "./HomeScreen";
-import Save from "../(tabs)/save";
+import FavoritesScreen from "../(tabs)/save";
 import Profile from "../(tabs)/profile";
 import Kategori from "../(tabs)/kategori";
-
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -58,7 +57,7 @@ const Tabs = () => {
     >
       <Tab.Screen name="Home" component={Home} options={noHead} />
       <Tab.Screen name="Kategori" component={Kategori} options={noHead} />
-      <Tab.Screen name="Save" component={Save} options={noHead} />
+      <Tab.Screen name="Save" component={FavoritesScreen} options={noHead} />
       <Tab.Screen name="Profile" component={Profile} options={noHead} />
     </Tab.Navigator>
   );
