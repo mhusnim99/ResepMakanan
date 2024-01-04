@@ -1,103 +1,106 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Center, Text, Pressable, Input, Icon, FormControl, ScrollView } from 'native-base';
-import { Button } from "../../components";
-import { clearStorage, getData } from "../../utils";
-import FIREBASE from "../../config/FIREBASE";
+import React, { useState, useEffect } from "react";
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useFocusEffect } from '@react-navigation/native';
 
-const Profile = ({ navigation }) => {
-  const [profile, setProfile] = useState(null);
 
-  const getUserData = () => {
-    getData("user").then((res) => {
-      const data = res;
-      if (data) {
-        console.log("isi data", data);
-        setProfile(data);
-      } else {
-        // navigation.replace('Login');
+const FavoritesScreen = () => {
+  const [savedIngredients, setSavedIngredients] = useState([]);
+
+  // Load saved ingredients on component mount
+  useFocusEffect(
+    React.useCallback(() => {
+      loadSavedIngredients();
+    }, [])
+  );
+
+    const loadSavedIngredients = async () => {
+      try {
+        const savedIngredientsJSON = await AsyncStorage.getItem("selectedIngredients");
+        if (savedIngredientsJSON) {
+          const savedIngredientsArray = JSON.parse(savedIngredientsJSON);
+          console.log("Loaded Ingredients:", savedIngredientsArray);
+          setSavedIngredients(savedIngredientsArray);
+        }
+      } catch (error) {
+        console.error("Error loading saved ingredients:", error.message);
       }
-    });
-  };
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      getUserData();
-    });
-
-    return () => {
-      unsubscribe();
     };
-  }, [navigation]);
 
-  const onSubmit = (profile) => {
-    if (profile) {
-      FIREBASE.auth()
-        .signOut()
-        .then(() => {
-          // Sign-out successful.
-          clearStorage();
-          navigation.navigate('Login');
-        })
-        .catch((error) => {
-          // An error happened.
-          alert(error);
-        });
-    } else {
-      navigation.replace("login");
+
+  const deleteIngredient = async (index) => {
+    try {
+      // Create a copy of the current savedIngredients array
+      const updatedIngredients = [...savedIngredients];
+      // Remove the selected ingredient
+      updatedIngredients.splice(index, 1);
+      // Update the state and AsyncStorage
+      setSavedIngredients(updatedIngredients);
+      await AsyncStorage.setItem("selectedIngredients", JSON.stringify(updatedIngredients));
+    } catch (error) {
+      console.error("Error deleting ingredient:", error.message);
     }
   };
 
+  const confirmDelete = (index) => {
+    Alert.alert(
+      "Delete Ingredient",
+      "Are you sure you want to delete this ingredient?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "Delete", onPress: () => deleteIngredient(index) },
+      ]
+    );
+  };
+
   return (
-    <ScrollView>
-      <Box>
-        <Box borderBottomRadius="30"  bg="#FAA70A">
-          <Center>
-            <Text mt="60" mb="60" fontSize="30" color="white" fontWeight="bold">
-            {profile?.nama}
-            </Text>
-          </Center>
-        </Box>
-          <Box mt="30">
-            <FormControl p={30} >
-              <FormControl.Label>Nama</FormControl.Label>
-              <Input
-                bg={"white"}
-                borderRadius={15}
-              >{profile?.nama}</Input>
-              <FormControl.Label>Nama</FormControl.Label>
-              <Input
-                bg={"white"}
-                borderRadius={15}
-              >{profile?.umur}</Input>
-              <FormControl.Label>Nama</FormControl.Label>
-              <Input
-                bg={"white"}
-                borderRadius={15}
-              >{profile?.tb}</Input>
-              <FormControl.Label>Nama</FormControl.Label>
-              <Input
-                bg={"white"}
-                borderRadius={15}
-              >{profile?.bb}</Input>
-              <Button
-              type="text"
-              title={profile ? "Logout" : "login"}
-              padding={"$3"}
-              onPress={() => onSubmit(profile)}
-            />
-            <Button
-              title="Edit Profile"
-              type="text"
-              padding={"$3"}
-              onPress={() => navigation.navigate('Edit Profile')}
-            />
-            </FormControl>
-            
-            
-          </Box>
-      </Box>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.header}>Halaman Favorit</Text>
+      <ScrollView style={styles.scrollView}>
+        {/* Display recipe titles */}
+        {savedIngredients.map((recipe, index) => (
+          <View key={index} style={styles.recipeContainer}>
+            {recipe && (
+              <View>
+                <Text style={styles.recipeTitle}>{recipe.title}</Text>
+                <TouchableOpacity onPress={() => confirmDelete(index)}>
+                  <Text style={styles.deleteButton}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
-export default Profile;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#F8F6EB",
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  scrollView: {
+    flex: 1,
+  },
+  recipeContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#DDD",
+    paddingVertical: 12,
+  },
+  recipeTitle: {
+    fontSize: 18,
+  },
+  deleteButton: {
+    color: "red",
+  },
+});
+
+export default FavoritesScreen;
