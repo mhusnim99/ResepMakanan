@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Heading, Image, Text, Box, View, FlatList, Icon, ScrollView, HStack, Button } from "native-base";
+import { Heading, Image, Text, Box, View, FlatList, Icon, ScrollView, HStack} from "native-base";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import resep from "../../dummy/resep";
