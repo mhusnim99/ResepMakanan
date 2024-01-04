@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Center, Text, Pressable, Input, Icon, FormControl, ScrollView, Image } from 'native-base';
+import { Box, Center, Text, Pressable, Input, Icon, FormControl, ScrollView } from 'native-base';
 import { Button } from "../../components";
 import { clearStorage, getData } from "../../utils";
 import FIREBASE from "../../config/FIREBASE";
@@ -48,30 +48,38 @@ const Profile = ({ navigation }) => {
   };
 
   return (
+    <ScrollView>
       <Box>
         <Box borderBottomRadius="30"  bg="#FAA70A">
           <Center>
-            <Image
-                mt={39}
-                source={require('../../../assets/profile.jpg')}
-                style={{ width: 100, height: 100, borderRadius: 50 }}
-              />
-            <Text mt="30" mb="30" fontSize="30" color="white" fontWeight="bold">
+            <Text mt="60" mb="60" fontSize="30" color="white" fontWeight="bold">
             {profile?.nama}
             </Text>
           </Center>
         </Box>
-          <Box p="10" >
-            <Text fontSize={"15"}>Nama:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.nama}</Text>
-            <Text fontSize={"15"}>Umur:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.umur}</Text>
-            <Text fontSize={"15"}>Tinggi Badan:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.tb}</Text>
-            <Text fontSize={"15"}>Berat Badan:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.bb}</Text>
-          <Center>
-          <Button
+          <Box mt="30">
+            <FormControl p={30} >
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.nama}</Input>
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.umur}</Input>
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.tb}</Input>
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+              >{profile?.bb}</Input>
+              <Button
               type="text"
               title={profile ? "Logout" : "login"}
               padding={"$3"}
@@ -83,9 +91,12 @@ const Profile = ({ navigation }) => {
               padding={"$3"}
               onPress={() => navigation.navigate('Edit Profile')}
             />
-            </Center>
+            </FormControl>
+            
+            
           </Box>
       </Box>
+    </ScrollView>
   );
 };
 

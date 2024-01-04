@@ -3,9 +3,9 @@ import { Box, Center, Heading, Image, Text, Divider } from "native-base";
 import { FlatList, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import resep from "../../dummy/resep";
 
-const Kaloritinggi = ({ route }) => {
-  const { recipes } = route.params;
+const ListResep = ({ route }) => {
   const navigation = useNavigation();
 
   // const navigateToRecipeDetail = (recipe) => {
@@ -42,10 +42,6 @@ const Kaloritinggi = ({ route }) => {
           <Heading size="md" marginBottom={2}>
             {item.title}
           </Heading>
-          <Text fontSize="sm" color="gray.500">
-            Kalori: {item.kalori}
-          </Text>
-          {/* Add other recipe details as needed */}
         </Box>
       </Box>
     </TouchableOpacity>
@@ -55,12 +51,12 @@ const Kaloritinggi = ({ route }) => {
     <Center flex={1} backgroundColor="#F8F6EB">
       <SafeAreaView>
         <Heading size="lg" marginBottom={4} marginTop={6} textAlign="center">
-          TINGGI KALORI
+          LIST RESEP
         </Heading>
         <Divider borderBottomWidth={1} marginBottom={4} />
       </SafeAreaView>
       <FlatList
-        data={recipes}
+        data={resep}
         renderItem={renderRecipeItem}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
@@ -69,4 +65,4 @@ const Kaloritinggi = ({ route }) => {
   );
 };
 
-export default Kaloritinggi;
+export default ListResep;

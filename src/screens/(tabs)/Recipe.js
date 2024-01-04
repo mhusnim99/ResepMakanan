@@ -17,7 +17,7 @@ const Recipe = ({ route }) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Pressable onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 40, left: 20, zIndex: 1 }}>
+        <Pressable onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 20, left: 20, zIndex: 1 }}>
           <Icon as={Ionicons} name="arrow-back" size={10} color="black" />
         </Pressable>
         <Box alignItems="center" mt={20}>
@@ -65,7 +65,13 @@ const Recipe = ({ route }) => {
               <Heading size="md" ml="-1">
                 {kiw.title}
               </Heading>
-              <Text fontWeight="500">{kiw.content}</Text>
+              {/* <Text fontWeight="500">{kiw.content}</Text> */}
+              <Text mt={5} fontSize={20} fontWeight={500}>
+                Langkah-langkah:
+              </Text>
+              {kiw.steps.map((step, index) => (
+                <Text key={index}>{`${index + 1}. ${step}`}</Text>
+              ))}
             </Stack>
           </Box>
         </Box>
