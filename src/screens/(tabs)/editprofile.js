@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Center, Box, FormControl, Input, Text, ScrollView, Pressable, Icon } from "native-base";
+import { Center, Box, FormControl, Input, Text, ScrollView, Pressable, Icon, Image } from "native-base";
 import {
   Alert,
   Modal,
@@ -79,7 +79,7 @@ const EditProfile = ({ route, navigation }) => {
             <Icon as={Ionicons} name="arrow-back" size={10} color="black" />
           </Pressable>
         </Box>
-        <Box bg='#FAF8ED' mt={20} mb={20} alignItems='center'>
+        <Box flex={1} bg='#FAF8ED' p={30} alignItems='center'>
           <Center
             bg="#FAA70A"
             _text={{
@@ -95,15 +95,22 @@ const EditProfile = ({ route, navigation }) => {
           >
             Edit Profile
           </Center>
+          <Center>
+            <Image       
+              mt={10}
+              source={require('../../../assets/profile.jpg')}
+              style={{ width: 130, height: 130, borderRadius: 50 }}
+            />
+          </Center>
         </Box>
         <Box flex={1} bg='#FAA70A' borderTopRadius={80}>
           <FormControl p={30} >
-            <FormControl.Label>Nama</FormControl.Label>
+            <FormControl.Label mt={5}>Nama</FormControl.Label>
             <Input
             placeholder="Enter Email"
             value={nama}
             onChangeText={(text) => setNama(text)}
-            mb={2}
+            mb={5}
             bgColor='#FAF8ED'
             borderRadius={15}
           />
@@ -112,7 +119,7 @@ const EditProfile = ({ route, navigation }) => {
               placeholder="Enter umur"
               value={umur}
               onChangeText={(text) => setUmur(text)}
-              mb={2}
+              mb={5}
               bgColor='#FAF8ED'
               borderRadius={15}
             />
@@ -121,7 +128,7 @@ const EditProfile = ({ route, navigation }) => {
               placeholder="Enter Tinggi Badan"
               value={tb}
               onChangeText={(text) => setTb(text)}
-              mb={2}
+              mb={5}
               bgColor='#FAF8ED'
               borderRadius={15}
             />
@@ -130,7 +137,7 @@ const EditProfile = ({ route, navigation }) => {
               placeholder="Enter Berat Badan"
               value={bb}
               onChangeText={(text) => setBb(text)}
-              mb={2}
+              mb={10}
               bgColor='#FAF8ED'
               borderRadius={15}
             />

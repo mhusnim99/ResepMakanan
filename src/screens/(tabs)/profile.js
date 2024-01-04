@@ -48,44 +48,75 @@ const Profile = ({ navigation }) => {
   };
 
   return (
+    <ScrollView>
       <Box>
-        <Box borderBottomRadius="30"  bg="#FAA70A">
+        <Box borderBottomRadius="120" height="25%" bg="#FAA70A">
           <Center>
-            <Image
-                mt={39}
-                source={require('../../../assets/profile.jpg')}
-                style={{ width: 100, height: 100, borderRadius: 50 }}
-              />
-            <Text mt="30" mb="30" fontSize="30" color="white" fontWeight="bold">
-            {profile?.nama}
+            <Text mt="70" fontSize="30" color="white" fontWeight="bold">
+              Profil Pengguna
             </Text>
+            <Image
+                    mt={60}
+                    source={require('../../../assets/profile.jpg')}
+                    style={{ width: 120, height: 120, borderRadius: 50 }}
+                  />
           </Center>
         </Box>
-          <Box p="10" >
-            <Text fontSize={"15"}>Nama:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.nama}</Text>
-            <Text fontSize={"15"}>Umur:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.umur}</Text>
-            <Text fontSize={"15"}>Tinggi Badan:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.tb}</Text>
-            <Text fontSize={"15"}>Berat Badan:</Text>
-            <Text fontSize={"30"} color="#FFC436">{profile?.bb}</Text>
-          <Center>
-          <Button
+          <Box mt={10}>
+            <FormControl p={30} >
+              <FormControl.Label>Nama</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+                isReadOnly
+                mb={5} 
+                bgColor= "#FAA70A"
+                color={'white'}
+              >{profile?.nama}</Input>
+              <FormControl.Label>Umur</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+                isReadOnly
+                mb={5} 
+                bgColor= "#FAA70A"
+                color={'white'}
+              >{profile?.umur}</Input>
+              <FormControl.Label>Tinggi Badan</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+                isReadOnly
+                mb={5} 
+                bgColor= "#FAA70A"
+                color={'white'}
+              >{profile?.tb}</Input>
+              <FormControl.Label>Berat Badan</FormControl.Label>
+              <Input
+                bg={"white"}
+                borderRadius={15}
+                isReadOnly
+                mb={5} 
+                bgColor= "#FAA70A"
+                color={'white'}
+              >{profile?.bb}</Input>
+               <Button
+              title="Edit Profile"
+              type="text"
+              padding={"$4"}
+              onPress={() => navigation.navigate('Edit Profile')}
+            />
+              <Button
               type="text"
               title={profile ? "Logout" : "login"}
               padding={"$3"}
               onPress={() => onSubmit(profile)}
             />
-            <Button
-              title="Edit Profile"
-              type="text"
-              padding={"$3"}
-              onPress={() => navigation.navigate('Edit Profile')}
-            />
-            </Center>
+           
+            </FormControl>
           </Box>
       </Box>
+    </ScrollView>
   );
 };
 
