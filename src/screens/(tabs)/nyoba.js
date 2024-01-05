@@ -57,6 +57,7 @@ const FavoritesScreen = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Halaman Favorit</Text>
       <ScrollView style={styles.scrollView}>
+        {/* Display recipe titles */}
         {savedIngredients.map((recipe, index) => (
           <View key={index} style={styles.recipeContainer}>
             {recipe && (
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    marginTop: 20,
     fontWeight: "bold",
     marginBottom: 16,
     textAlign: "center",

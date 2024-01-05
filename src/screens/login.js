@@ -1,58 +1,94 @@
-import React, { useState } from 'react';
-import { Box, Heading, Input, Button, Text, FormControl } from 'native-base';
+import React, { useState } from "react";
+import { Box, Heading, Text, FormControl, Center} from 'native-base';
+import {
+  Alert,
+  Modal,
+  ModalBackdrop,
+  AlertText,
+} from "@gluestack-ui/themed";
 import { useNavigation } from '@react-navigation/native';
-// import Register from './register';
-// import Tabs from './(tabs)/_layout';
+import { Input, Button } from "../components";
+import { loginUser } from "../actions/AuthAction"
 
-const Login = () => {
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = () => {
-    console.log('Email:', email);
-    console.log('Password:', password);
+  const toggleAlert = (message) => {
+    setShowAlert(!showAlert);
+    setAlertMessage(message);
   };
 
-  const navigation = useNavigation();
+  const login = () => {
+    if (email && password) {
+      loginUser(email, password)
+        .then((user) => {
+          // Pengguna berhasil login, lakukan sesuatu dengan data pengguna jika perlu
+          navigation.navigate('Tabs');
+        })
+        .catch((error) => {
+          // Terjadi kesalahan saat login, tampilkan pesan kesalahan
+          console.log("Error", error.message);
+          toggleAlert(error.message);
+        });
+    }
+  };
 
   return (
-      <Box flex={1} p={4} alignItems='center' justifyContent='center' bg='#FAA70A'>
-        <Heading 
-        paddingBottom={50}
-        color= "#FAF8ED"
+    <Box flex={1} p={4} alignItems='center' justifyContent='center' bg='#FAA70A'>
+      <Box backgroundColor="white" width="360" height="330" borderBottomRadius="120">
+      <Center>
+        <Heading paddingBottom={50}
+        color='#FAA70A'
         fontSize="33"
+        marginTop="150"
         >Login</Heading>
-        <FormControl p={10} paddingBottom={0.10}>
-          <FormControl.Label>Email</FormControl.Label>
-          <Input
-            placeholder="Email"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-            mb={2}
-            bgColor='#FAF8ED'
-            borderRadius={15}
-          />
-        </FormControl>
-        <FormControl p={10}>
-          <FormControl.Label>Kata Sandi</FormControl.Label>
-          <Input
-            placeholder="Kata Sandi"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            secureText
-            mb={2}
-            bgColor='#FAF8ED'
-            borderRadius={15}
-          />
-          <Text mt={2} >Don't have an account ?<Text color="blue.500" onPress={()=> navigation.navigate('Register')}> Register Here</Text></Text>
-        </FormControl>
-        <Box alignItems="center" p={30} borderRadius={15} >
-            <Button bg='#FAF8ED' borderRadius={15}  onPress={() => navigation.navigate("Tabs")}>
-                <Text color='#FAA70A' fontSize={17}>Login</Text>
-            </Button>
-        </Box>
+      </Center>
       </Box>
+      <FormControl p={10} paddingBottom={0.10}>
+        <Heading color="grey" fontSize="20" >Email</Heading>
+        <Input
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          bgColor='#FAF8ED'
+          borderRadius={15}
+        />
+      </FormControl>
+      <FormControl p={10}>
+      <Heading color="grey" fontSize="20">Kata Sandi</Heading>
+        <Input
+          placeholder="Kata Sandi"
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          secureText
+          mb={2}
+          bgColor='#FAF8ED'
+          borderRadius={15}
+        />
+        <Text mt={2} >Don't have an account ?<Text color="blue.500" onPress={() => navigation.navigate('Register')}> Register Here</Text></Text>
+      </FormControl>
+      <Box alignItems="center" borderRadius={15} >
+        <Button
+          title="Login"
+          type="text"
+          padding={"$4"}
+          onPress={() => login()}
+        />
+      </Box>
+      {/* show Alert */}
+      {showAlert && (
+        <Modal isOpen={showAlert} onClose={() => toggleAlert()}>
+          <ModalBackdrop />
+          <Alert mx="$4" action="error" variant="solid">
+            <AlertText fontWeight="$bold">Error!</AlertText>
+            <AlertText>{alertMessage}</AlertText>
+          </Alert>
+        </Modal>
+      )}
+    </Box>
   );
 };
 
