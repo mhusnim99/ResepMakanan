@@ -18,6 +18,7 @@ const Ingredient = ({ route }) => {
         if (savedIngredientsJSON) {
           const savedIngredients = JSON.parse(savedIngredientsJSON);
           setSelectedIngredients(savedIngredients);
+          setIsLoved(savedIngredients.some(ingredient => ingredient.title === params.title));
         }
       } catch (error) {
         console.error("Error loading saved ingredients:", error.message);
@@ -25,7 +26,7 @@ const Ingredient = ({ route }) => {
     };
 
     loadSavedIngredients();
-  }, []);
+  }, [params.title]);
 
   const handleCheckboxChange = (value) => {
     // Toggle checkbox value in selectedIngredients
@@ -38,8 +39,10 @@ const Ingredient = ({ route }) => {
 
   const handleSave = async () => {
     try {
-      // Save selected ingredients to AsyncStorage
-      await AsyncStorage.setItem("selectedIngredients", JSON.stringify(selectedIngredients));
+      // Save selected ingredients along with the recipe title to AsyncStorage
+      const updatedIngredients = [...selectedIngredients, { title: params.title, ingredients: params.ingredients }];
+      await AsyncStorage.setItem("selectedIngredients", JSON.stringify(updatedIngredients));
+      setIsLoved(true);
       console.log("Selected Ingredients saved successfully!");
     } catch (error) {
       console.error("Error saving selected ingredients:", error.message);
@@ -86,16 +89,7 @@ const Ingredient = ({ route }) => {
             ))}
           </Box>
         </Box>
-        <Box alignItems="center" padding={20} flexDirection="row" justifyContent="center">
-          <Button
-            size="lg"
-            borderRadius={10}
-            mr={5}
-            onPress={() => navigation.navigate("Recipe", { params: params })}
-            bg="#FAA70A"
-          >
-            Watch Recipe
-          </Button>
+        <Box alignItems="center" padding={10} flexDirection="row" justifyContent="center">
           <Button
             size="lg"
             borderRadius={10}
