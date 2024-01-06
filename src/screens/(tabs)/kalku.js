@@ -52,7 +52,7 @@ const Kalkulator = () => {
       <SafeAreaView>
         <ScrollView>
           <NativeBaseProvider>
-              <Box p={4} bg='white'>
+              <Box p={4} bg='#FFEEDB'>
                 <Center>
                   <Heading mb={4} color='#ED7D31'>
                     BMI Kalkulator
@@ -66,6 +66,7 @@ const Kalkulator = () => {
                     onChangeText={(text) => setTinggi(text)}
                     mb={2}
                     borderRadius={15}
+                    bgColor= "white"
                   />
                 </FormControl>
                 <FormControl>
@@ -76,6 +77,8 @@ const Kalkulator = () => {
                     onChangeText={(text) => setBerat(text)}
                     mb={2}
                     borderRadius={15}
+                    bgColor= "white"
+
                   />
                 </FormControl>
 
