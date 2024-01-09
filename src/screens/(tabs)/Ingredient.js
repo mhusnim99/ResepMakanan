@@ -94,10 +94,10 @@ const Ingredient = ({ route }) => {
             size="lg"
             borderRadius={10}
             mr={5}
-            onPress={() => navigation.navigate("Ulasan", { params: params })}
+            onPress={() => navigation.navigate("Recipe", { params: params })}
             bg="#FAA70A"
           >
-            Review
+            Wacth Recipe
           </Button>
           <Button
             size={"lg"}
